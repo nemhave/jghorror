@@ -4,7 +4,7 @@ from pygame.font import Font
 
 from code.AudioManager import AudioManager
 from code.Const import WIN_WIDTH, COLOR_TITLE, MENU_OPTION, POS_INIT_MENU, COLOR_OPTION_DEFAULT, \
-    COLOR_OPTION_SELECT, PLAYLIST
+    COLOR_OPTION_SELECT, PLAYLIST, COLOR_WHITE, WIN_HEIGHT, MENU_HELP
 
 
 class Menu:
@@ -36,6 +36,7 @@ class Menu:
             for event in pg.event.get():
                 if event.type == pg.QUIT:  # close window
                     pg.quit()  # close cod
+                    quit()
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_DOWN:
                         menu_select = (menu_select + 1) % len(MENU_OPTION)
@@ -45,10 +46,18 @@ class Menu:
                         AudioManager.change_music(PLAYLIST["Select"])
                         return MENU_OPTION[menu_select]
 
+            self.menu_base(14, MENU_HELP[0], COLOR_WHITE, (10, WIN_HEIGHT - 35))
+            self.menu_base(14, MENU_HELP[1], COLOR_WHITE, (10, WIN_HEIGHT - 20))
             pg.display.flip()
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pg.font.SysFont(name="Chiller", size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
+        self.window.blit(source=text_surf, dest=text_rect)
+    
+    def menu_base(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
+        text_font: Font = pg.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
+        text_rect: Rect = text_surf.get_rect(left=text_pos[0], top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)

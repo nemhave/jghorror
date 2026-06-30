@@ -10,8 +10,8 @@ class Background(Entity):
 
         print(aux_counter)
 
-        if aux_counter >= 7000:
-            if aux_counter >= ENTITY_MOVE[self.name] + 6000:
+        if aux_counter >= 420:
+            if aux_counter >= ENTITY_MOVE[self.name] + 360:
                 self.rect.left = ENTITY_VISIBLE[self.name]
         elif aux_counter >= ENTITY_MOVE[self.name]:
             self.rect.left = 0
