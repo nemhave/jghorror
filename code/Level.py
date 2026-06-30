@@ -2,7 +2,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.AudioManager import AudioManager
-from code.Const import PLAYLIST, WIN_HEIGHT, COLOR_WHITE, TIMEOUT_LEVEL
+from code.Const import PLAYLIST, WIN_HEIGHT, COLOR_WHITE, TIMEOUT_LEVEL, EVENT_ENEMY
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -16,6 +16,9 @@ class Level:
         self.name = name
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))
+        self.entity_list.append(EntityFactory.get_entity('Player1'))
+
+        pg.time.set_timer(EVENT_ENEMY, 2000)
 
     def run(self):
         AudioManager.change_music(PLAYLIST["Level"])
@@ -36,8 +39,10 @@ class Level:
                 if event.type == pg.QUIT:
                     pg.quit()
                     quit()
+                if event.type == EVENT_ENEMY:
+                    self.entity_list.append(EntityFactory.get_entity('Enemy1'))
 
-            self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', COLOR_WHITE, (10, 5))
+            # self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
 
             pg.display.flip()

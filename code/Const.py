@@ -1,4 +1,6 @@
 # C
+import pygame
+
 COLOR_TITLE = (255, 30, 30)
 COLOR_OPTION_DEFAULT = (255, 80, 0)
 COLOR_OPTION_SELECT = (255, 201, 15)
@@ -18,6 +20,9 @@ ENTITY_VISIBLE = {
     'Level1Bg3': -371,
     'Level1Bg4': -464,
     'Level1Bg5': -557,
+    'Player1': 0,
+    'Enemy1': 0,
+    'Enemy2': 0,
 }
 
 ENTITY_MOVE = {
@@ -28,6 +33,8 @@ ENTITY_MOVE = {
     'Level1Bg4': 300,
     'Level1Bg5': 360,
 }
+
+EVENT_ENEMY = pygame.USEREVENT + 1
 
 # M
 MENU_OPTION = ('Start Game',
