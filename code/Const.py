@@ -3,6 +3,12 @@ COLOR_TITLE = (255, 30, 30)
 COLOR_OPTION_DEFAULT = (255, 80, 0)
 COLOR_OPTION_SELECT = (255, 201, 15)
 
+PLAYLIST = {
+    "Menu": "./asset/Menu.mp3",
+    "Select": "./asset/Select.flac",
+    "Level": "./asset/level.wav"
+}
+
 # E
 ENTITY_VISIBLE = {
     'Level1Bg0': 0,

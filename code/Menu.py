@@ -2,20 +2,19 @@ import pygame as pg
 from pygame import Surface, Rect
 from pygame.font import Font
 
+from code.AudioManager import AudioManager
 from code.Const import WIN_WIDTH, COLOR_TITLE, MENU_OPTION, POS_INIT_MENU, COLOR_OPTION_DEFAULT, \
-    COLOR_OPTION_SELECT
+    COLOR_OPTION_SELECT, PLAYLIST
 
 
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pg.image.load('./asset/MenuBg.png')
+        self.surf = pg.image.load('./asset/MenuBg.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
     def run(self):
-        pg.mixer_music.load('./asset/Menu.mp3')
-        pg.mixer_music.play(-1)
-
+        AudioManager.change_music(PLAYLIST["Menu"])
         menu_select = 0
 
         while True:
@@ -43,6 +42,7 @@ class Menu:
                     elif event.key == pg.K_UP:
                         menu_select = (menu_select - 1) % len(MENU_OPTION)
                     elif event.key == pg.K_RETURN:
+                        AudioManager.change_music(PLAYLIST["Select"])
                         return MENU_OPTION[menu_select]
 
             pg.display.flip()
